@@ -10,9 +10,9 @@
 [![MIT license](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=for-the-badge)](https://github.com/luolongfei/freenom/blob/main/LICENSE)
 
 Documentation: [English version](https://github.com/luolongfei/freenom/blob/main/README_EN.md) | 中文版
-</div>
+</div> 
 
-[📢 注意](#-注意)
+[📢 公告](#-公告)
 
 [🌿 特别感谢 Special Thanks](#-特别感谢-special-thanks)
 
@@ -24,13 +24,19 @@ Documentation: [English version](https://github.com/luolongfei/freenom/blob/main
 
 [📪 配置送信功能](#-配置送信功能)（支持 邮件送信 / Telegram Bot / 企业微信 / Server 酱 / Bark 等送信方式）
 
-[🐳 通过 Docker 方式部署](#-通过-docker-部署)（推荐，最简单的部署方式之一）
+[⛵ 通过 Docker Compose 方式部署](#-通过-docker-compose-部署)
 
-[🚈 通过 Railway 部署](#-通过-Railway-部署)
+[🐳 通过 Docker 方式部署](#-通过-docker-部署)（推荐，最简单的部署方式之一）
 
 [🧊 通过 Heroku 部署](#-通过-Heroku-部署)
 
-[☁ 通过 各种云函数 部署](#-通过各种云函数部署)（由于 Railway 和 Heroku 都增加了每月时长限制，故目前想完全免费部署，暂时只有云函数可选）
+[🚈 通过 Railway 部署](#-通过-Railway-部署)
+
+[📦 通过 Koyeb 部署](#-通过-Koyeb-部署)（没有自己服务器的用户可使用此方案）
+
+[🧪 通过 Mogenius 部署](#-通过-Mogenius-部署)（已不可行）
+
+[☁ 通过 各种云函数 部署](#-通过各种云函数部署) （目前各平台已开启收费模式，已放弃支持）
 
 [🚧 直接拉取源码部署](#-直接拉取源码部署)
 
@@ -46,20 +52,17 @@ Documentation: [English version](https://github.com/luolongfei/freenom/blob/main
 
 [📝 TODO List](#-TODO-List)
 
-[📰 更新日志](#-更新日志)（每次新版本发布，可以参考此日志决定是否更新）
+[🍅 本项目的其它语言实现](#-本项目的其它语言实现)
 
 [🎉 鸣谢](#-鸣谢)
 
 [🥝 开源协议](#-开源协议)
 
-### 📢 注意
+### 📢 公告
 
-- 之前因为 GitHub Action 事件导致本项目被封禁，而后我短暂将项目转移到了 https://github.com/luolongfei/next-freenom
-  仓库，然后在 [@Mattraks](https://github.com/Mattraks) 的提醒下，通过特别的方式恢复了本仓库。
-- 本次封禁导致的直接后果是以前的`issues`全部丢失，以及近`1.8k`的`star`数重新归零，在动力上面确实有受到影响，不过也不会有太大影响，本项目依然长期维护，如果项目有帮到你，欢迎 star。
-- 狡兔三窟，临时仓库 https://github.com/luolongfei/next-freenom 也是备用仓库，如若本仓库再次失联，可以移步到备用仓库获取最新消息，正常情况下以后的开发维护依然在本仓库进行。
-- 推荐 [🐳 通过 Docker 方式部署](#-通过-docker-部署)。如果你没有自己的服务器，可参考本文档 [🚈 通过 Railway 部署](#-通过-Railway-部署)
-  、[🧊 通过 Heroku 部署](#-通过-Heroku-部署)、[☁ 通过 各种云函数 部署](#-通过各种云函数部署) 等相关内容。
+- 热心网友创建了`Freenom 续期事务局`群组，可供交流、测试、反馈， **加入可直接访问 [https://t.me/freenom_auto_renew](https://t.me/freenom_auto_renew) ，或者扫码加入：**
+
+<a href="https://t.me/freenom_auto_renew"><img src="https://s2.loli.net/2022/10/11/k4sSoXqMVfpIY3d.png" alt="freenom_tg_group.png" border="0" width="220px" height="280px" /></a>
 
 ### 🌿 特别感谢 Special Thanks
 
@@ -68,7 +71,7 @@ Documentation: [English version](https://github.com/luolongfei/freenom/blob/main
 Thanks for non-commercial open source development authorization by JetBrains.
 
 <a href="https://www.jetbrains.com/?from=luolongfei/freenom" target="_blank" title="JetBrains Logo (Main) logo.">
-<img src="https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.svg" width='200px' height='200px' alt="JetBrains Logo (Main) logo.">
+<img src="https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.svg" width="200px" height="200px" alt="JetBrains Logo (Main) logo.">
 </a>
 
 ### 📃 引言
@@ -79,7 +82,7 @@ Thanks for non-commercial open source development authorization by JetBrains.
 
 无论是续期成败或者程序执行出错，都会收到脚本发出的通知。如果是续期成败相关的通知，通知会包括未续期域名的到期天数等内容。*此处展示的是通知邮件的内容。*
 
-<a href="https://s4.ax1x.com/2022/02/26/bZr7WQ.png"><img src="https://s4.ax1x.com/2022/02/26/bZr7WQ.png" alt="邮件示例" border="0" width="670" height="540" /></a>
+<a href="https://s4.ax1x.com/2022/02/26/bZr7WQ.png"><img src="https://s4.ax1x.com/2022/02/26/bZr7WQ.png" alt="邮件示例" border="0" width="95%" height="100%" /></a>
 
 ### 🎁 事前准备
 
@@ -217,6 +220,125 @@ Thanks for non-commercial open source development authorization by JetBrains.
 
 ***
 
+### ⛵ 通过 Docker Compose 部署
+
+**注意，目前是 beta 版本，只支持在 amd64 架构的机器上安装，arm 或其它架构的用户请稍安勿躁，等后续更新。或者如果你需要一台服务器，可以考虑** [美国便宜 VPS](https://go.llfapp.com/cc)
+
+#### 1、一键安装 docker 和 docker compose
+
+Debian / Ubuntu（推荐）
+
+```shell
+apt-get update -y;
+apt-get install -y wget vim git make;
+wget -qO- get.docker.com | bash;
+systemctl start docker;
+sudo systemctl enable docker.service;
+sudo systemctl enable containerd.service;
+docker version;
+DOCKER_COMPOSE_VER=2.24.3;
+DOCKER_CONFIG=/usr/local/lib/docker;
+mkdir -p $DOCKER_CONFIG/cli-plugins;
+curl -SL https://github.com/docker/compose/releases/download/v${DOCKER_COMPOSE_VER}/docker-compose-linux-x86_64 -o $DOCKER_CONFIG/cli-plugins/docker-compose;
+sudo chmod +x /usr/local/lib/docker/cli-plugins/docker-compose;
+docker compose version;
+```
+
+CentOS
+
+```shell
+yum update -y;
+yum install -y wget vim make;
+wget -qO- get.docker.com | bash;
+systemctl start docker;
+sudo systemctl enable docker.service;
+sudo systemctl enable containerd.service;
+docker version;
+DOCKER_COMPOSE_VER=2.24.3;
+DOCKER_CONFIG=/usr/local/lib/docker;
+mkdir -p $DOCKER_CONFIG/cli-plugins;
+curl -SL https://github.com/docker/compose/releases/download/v${DOCKER_COMPOSE_VER}/docker-compose-linux-x86_64 -o $DOCKER_CONFIG/cli-plugins/docker-compose;
+sudo chmod +x /usr/local/lib/docker/cli-plugins/docker-compose;
+docker compose version;
+```
+
+#### 2、下载本项目
+
+```shell
+git clone https://github.com/luolongfei/freenom.git && cd freenom
+```
+
+#### 3、配置
+
+##### 3.1、申请 wit.ai 的 token
+
+3.1.1 访问 https://wit.ai
+
+3.1.2 使用 Facebook 账户登录或者使用邮箱注册账户登录，只需要邮箱就可以注册
+
+3.1.3 前往 https://wit.ai/apps 画面，创建一个新的 app
+
+3.1.4 语言选择 English，名字随意，类型选择私有，创建之
+
+3.1.5 前往 Management > Settings (https://wit.ai/apps/<App ID>/settings) 画面
+
+3.1.6 复制 Client Access Token，下面需要写入 .env 文件中，WIT_AI_KEY='你复制的 Client Access Token'
+
+##### 3.2、修改 .env 配置文件
+
+将 .env 配置文件中的内容修改为你自己的配置，如果是从旧版升级，也可以直接把旧版 .env 复制到新版项目根目录，脚本会自动更新它。配置含义参考 .env.example 文件中的注解。
+
+```shell
+cp .env.example .env;
+vim .env;
+```
+
+修改完成后，输入 `:wq` 保存并退出。
+
+#### 4、启动
+
+注意：以下命令均需要在 docker-compose.yml 所在目录执行才有效。
+
+```shell
+make up
+```
+
+没错，就是这么简单。然后可以执行 `make logs` 查看实时日志。
+
+##### 4.1、常用命令
+
+启动或者更新到最新版
+
+```shell
+make up
+```
+
+停止
+
+```shell
+make down
+```
+
+查看实时日志
+
+```shell
+make logs
+```
+
+清理容器占用的空间
+
+```shell
+make clear
+```
+
+重启容器
+
+```shell
+make restart
+```
+
+*通过 docker compose 部署部分结束。*
+
 ### 🐳 通过 Docker 部署
 
 *如果你有自己的服务器，这是最推荐的部署方式。*
@@ -234,13 +356,13 @@ Docker 仓库地址为： [https://hub.docker.com/r/luolongfei/freenom](https://
 Debian / Ubuntu
 
 ```shell
-apt-get update && apt-get install -y wget vim
+apt-get update && apt-get install -y wget vim make
 ```
 
 CentOS
 
 ```shell
-yum update && yum install -y wget vim
+yum update && yum install -y wget vim make
 ```
 
 执行此命令等候自动安装 Docker
@@ -330,6 +452,10 @@ docker run -d --name freenom --restart always -v $(pwd):/conf -v $(pwd)/logs:/ap
 | TELEGRAM_BOT_TOKEN | 你的`Telegram bot`的`token` |  -  |  否   ||
 | TELEGRAM_BOT_ENABLE | 是否启用`Telegram Bot`推送功能 | `0` |  否   |    `1`：启用<br>`0`：不启用<br>默认不启用，如果设为`1`，则必须设置上面的`TELEGRAM_CHAT_ID`和`TELEGRAM_BOT_TOKEN`变量     |
 | NOTICE_FREQ | 通知频率 | `1` |  否   |                                 `0`：仅当有续期操作的时候<br>`1`：每次执行                                  |
+| NEZHA_SERVER | 哪吒探针服务端的 IP 或域名 |  -  |  否   ||
+| NEZHA_PORT | 哪吒探针服务端的端口 |  -  |  否   ||
+| NEZHA_KEY | 哪吒探针客户端专用 Key |  -  |  否   ||
+| NEZHA_TLS | 哪吒客户SSL/TLS加密 |  -  |  否   |  `1`：启用<br>`0`：不启用  |
 
 **更多配置项含义，请参考 [.env.example](https://github.com/luolongfei/freenom/blob/main/.env.example) 文件中的注释。**
 
@@ -408,37 +534,45 @@ systemctl restart docker
 
 ***
 
+### 🧊 通过 Heroku 部署
+
+**Heroku 已于 2022-11-28 停止提供免费服务，所以，忘掉本文吧。官方通告：[https://blog.heroku.com/next-chapter](https://blog.heroku.com/next-chapter)**
+
+有关 【通过 Heroku 部署】 的具体操作步骤请参考 [此处](https://github.com/luolongfei/freenom/wiki/%E9%80%9A%E8%BF%87-Heroku-%E9%83%A8%E7%BD%B2)
+
+***
+
 ### 🚈 通过 Railway 部署
 
-*由于 Railway 在几天前更新了服务条款，每月增加了使用时长限制，* **故不再推荐使用此方式部署。** 新的服务条款导致每月最多只能运行 21 天左右，详细条款内容参考 [此处](https://docs.railway.app/reference/pricing#execution-time-limit) 。
-
-目前，手里没有服务器的情况下，如果想完全免费部署，暂时只能考虑迁移至 阿里云函数 或者 华为云函数，请参考 [☁ 通过 各种云函数 部署](#-通过各种云函数部署) 等相关内容。
+*Railway 已更新服务条款，每月增加了使用时长限制，新的服务条款导致每月最多只能运行 21 天左右， **除非你验证了信用卡，则没有这个限制** 。详细条款内容参考 [此处](https://docs.railway.app/reference/pricing#execution-time-limit) 。*
 
 有关 【通过 Railway 部署】
 的具体操作步骤请参考 [此处](https://github.com/luolongfei/freenom/wiki/%E9%80%9A%E8%BF%87-Railway-%E9%83%A8%E7%BD%B2)
 
 ***
 
-### 🧊 通过 Heroku 部署
+### 📦 通过 Koyeb 部署
 
-*由于休眠问题以及 Cron 问题还没有比较完美的解决方案，故暂时不推荐通过这种方式部署。*
+*推荐没有自己服务器的用户使用此方案部署。此方案完全免费。*
 
-点击下方按钮，可以一键部署到 Heroku，不过由于 Heroku 免费版本每 30 分钟休眠，你可以将创建的 app 地址交给 [https://kaffeine.herokuapp.com](https://kaffeine.herokuapp.com/) ，让它每隔一段时间就 ping 一下你的地址，使得你的容器保持唤醒状态。而 Heroku 容器每个月最多只能清醒 500 个小时，所以还是会面临休眠问题。除非你验证信用卡以获取 1000 小时运行时长。
+有关 【通过 Koyeb 部署】 的具体操作步骤请参考 [此处](https://github.com/luolongfei/freenom/wiki/%E9%80%9A%E8%BF%87-Koyeb-%E9%83%A8%E7%BD%B2)
 
-**注意，Heroku 还有个不太好处理的问题，在容器内部似乎不能正常使用 Cron 计划任务，可能跟每次由不同用户启动容器，且每次容器都位于不同的机器有关。只能使用 Heroku 提供的调度器，很不灵活，或者借助代码实现与 Cron 类似的功能。参考：**
+**在看完上行文档的具体内容，并且你确定你行后**，便可点击下方按钮，尝试一键部署：
 
-> [https://stackoverflow.com/a/2611936](https://stackoverflow.com/a/2611936)
-> 
-> [https://medartus.medium.com/how-to-use-cron-on-heroku-for-free-778d8602a622](https://medartus.medium.com/how-to-use-cron-on-heroku-for-free-778d8602a622)
+[![Deploy to Koyeb](https://www.koyeb.com/static/images/deploy/button.svg)](https://app.koyeb.com/deploy?type=docker&name=freenom&ports=80;http;/&env[FF_TOKEN]=20190214&env[SHOW_SERVER_INFO]=1&env[MOSAIC_SENSITIVE_INFO]=1&env[FREENOM_USERNAME]=&env[FREENOM_PASSWORD]=&env[MULTIPLE_ACCOUNTS]=&env[MAX_REQUEST_RETRY_COUNT]=200&env[TELEGRAM_CHAT_ID]=&env[TELEGRAM_BOT_TOKEN]=&env[TELEGRAM_BOT_ENABLE]=0&env[NEZHA_SERVER]=[OPTION]%20Nezha%20server&env[NEZHA_PORT]=[OPTION]%20Nezha%20port&env[NEZHA_KEY]=[OPTION]%20Nezha%20key&env[NEZHA_TLS]=[OPTION]%20Enable%20tls&image=docker.io/luolongfei/freenom:koyeb)
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+***
+
+### 🧪 通过 Mogenius 部署
+
+已下线免费套餐，不再可用。 [https://github.com/luolongfei/freenom/discussions/208](https://github.com/luolongfei/freenom/discussions/208) 
 
 ***
 
 ### ☁ 通过各种云函数部署
 
 所有云函数使用的是同一个压缩包，已做兼容处理，下载地址：
-[https://github.com/luolongfei/freenom/releases/download/v0.5/freenom_scf.zip](https://github.com/luolongfei/freenom/releases/download/v0.5/freenom_scf.zip)
+[https://github.com/luolongfei/freenom/releases/download/v0.5.1/freenom_scf.zip](https://github.com/luolongfei/freenom/releases/download/v0.5.1/freenom_scf.zip)
 。本文档会在发布新版的时候同步更新此处的压缩包下载地址，所以不必担心，你看到的下载地址指向的包一定是最新版本。
 
 下载后你将得到一个 zip 文件，将 zip 文件放到你能找到的任意目录，后面我们将以 zip 文件的形式上传到各种云函数。
@@ -480,9 +614,11 @@ PayPal: [https://www.paypal.me/mybsdc](https://www.paypal.me/mybsdc)
 
 > Every time you spend money, you're casting a vote for the kind of world you want. -- Anna Lappe
 
-![pay](https://s2.ax1x.com/2020/01/31/1394at.png "Donation")
+![pay](https://images.llfapp.com/pay.png "Donation")
 
 ![每一次你花的钱都是在为你想要的世界投票。](https://s2.ax1x.com/2020/01/31/13P8cF.jpg)
+
+题外话：赞助的时候可以留言，留言内容将被展示在 [赞助列表画面](https://github.com/luolongfei/freenom/wiki/Donation-List) 。如果赞助图片未能正常显示，请访问： [https://images.llfapp.com/pay.png](https://images.llfapp.com/pay.png)
 
 **你的`star`或者`赞助`是我长期维护此项目的动力所在，由衷感谢每一位支持者，“每一次你花的钱都是在为你想要的世界投票”。 另外，将本项目推荐给更多的人，也是一种支持的方式，用的人越多更新的动力越足。**
 
@@ -513,19 +649,12 @@ PayPal: [https://www.paypal.me/mybsdc](https://www.paypal.me/mybsdc)
 - 支持自动升级
 - 多个账户的续期结果通知合并为同一条消息
 
-### 📰 更新日志
+### 🍅 本项目的其它语言实现
 
-此处只含最新版本的更新日志，完整的日志记录请参考 [CHANGELOG.md](https://github.com/luolongfei/freenom/blob/main/CHANGELOG.md)
+- [https://github.com/PencilNavigator/Freenom-Workers](https://github.com/PencilNavigator/Freenom-Workers) （JavaScript）
+- [https://github.com/Oreomeow/freenom-py](https://github.com/Oreomeow/freenom-py) （Python） 
 
-#### [Unreleased](#)
-
-- 解决 企业微信 因送信内容过长被截断问题
-
-#### [v0.5](https://github.com/luolongfei/freenom/releases/tag/v0.5) - 2022-05-15
-
-- 增加支持 华为云函数、Railway 等部署方式
-- 支持在消息中显示服务器信息，该功能默认关闭
-- 优化部分代码逻辑
+*(更多其它语言欢迎提交 PR 更新此列表)*
 
 ### 🎉 鸣谢
 
